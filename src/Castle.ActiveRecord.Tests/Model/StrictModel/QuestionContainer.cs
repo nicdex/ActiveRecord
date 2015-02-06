@@ -12,12 +12,10 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
+using System.Collections.Generic;
+
 namespace Castle.ActiveRecord.Tests.Model.StrictModel
 {
-	using System;
-
-	using Iesi.Collections;
-
 	public enum ContainerType
 	{
 		Abstract,
@@ -30,7 +28,7 @@ namespace Castle.ActiveRecord.Tests.Model.StrictModel
 	{
 		private int id;
 		private ContainerType type;
-		private ISet estratos = new ListSet();
+        private ISet<Estrato> estratos = new SortedSet<Estrato>();
 
 		public QuestionContainer()
 		{
@@ -51,7 +49,7 @@ namespace Castle.ActiveRecord.Tests.Model.StrictModel
 		}
 
 		[HasMany( typeof(Estrato), Inverse=true)]
-		public ISet Estratos
+		public ISet<Estrato> Estratos
 		{
 			get { return estratos; }
 			set { estratos = value; }

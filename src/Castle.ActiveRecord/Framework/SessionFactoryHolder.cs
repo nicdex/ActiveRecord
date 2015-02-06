@@ -70,13 +70,12 @@ namespace Castle.ActiveRecord.Framework
 		/// </summary>
 		public Configuration[] GetAllConfigurations()
 		{
-			HashedSet set = new HashedSet(type2Conf.Values);
-
-			Configuration[] confs = new Configuration[set.Count];
-
-			set.CopyTo(confs, 0);
-
-			return confs;
+		    lock (type2Conf.SyncRoot)
+		    {
+                Configuration[] confs = new Configuration[type2Conf.Count];
+                type2Conf.Values.CopyTo(confs, 0);
+                return confs;
+		    }
 		}
 
 		/// <summary>

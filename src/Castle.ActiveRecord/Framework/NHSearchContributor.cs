@@ -14,6 +14,7 @@
 
 namespace Castle.ActiveRecord.Framework
 {
+#if HAVE_NHIBERNATE_SEARCH
 	using System;
 	using NHibernate.Cfg;
 	using NHibernate.Event;
@@ -52,4 +53,5 @@ namespace Castle.ActiveRecord.Framework
 			return (object[])array;
 		}
 	}
+#endif
 }

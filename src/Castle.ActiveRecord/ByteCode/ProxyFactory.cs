@@ -12,12 +12,13 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
+using NHibernate.ByteCode.Castle;
+
 namespace Castle.ActiveRecord.ByteCode 
 {
 	using System;
 	using DynamicProxy;
 	using NHibernate;
-	using NHibernate.ByteCode.Castle;
 	using NHibernate.Engine;
 	using NHibernate.Proxy;
 
@@ -60,15 +61,15 @@ namespace Castle.ActiveRecord.ByteCode
         }
 
 		/// <summary>
-		/// Returns a proxy capable of field interception.
-		/// </summary>
-		/// <returns></returns>
-        public override object GetFieldInterceptionProxy() 
+        /// Returns a proxy capable of field interception.
+        /// </summary>
+        /// <returns></returns>
+        public override object GetFieldInterceptionProxy(object instanceToWrap)
         {
             var proxyGenerationOptions = new ProxyGenerationOptions();
             var interceptor = new LazyFieldInterceptor();
             proxyGenerationOptions.AddMixinInstance(interceptor);
-            return ProxyGenerator.CreateClassProxy(PersistentClass, proxyGenerationOptions, interceptor);
+            return ProxyGenerator.CreateClassProxyWithTarget(instanceToWrap, proxyGenerationOptions, interceptor);
         }
     }
 }

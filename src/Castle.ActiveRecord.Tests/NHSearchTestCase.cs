@@ -14,6 +14,7 @@
 
 namespace Castle.ActiveRecord.Tests
 {
+#if HAVE_NHIBERNATE_SEARCH
 	using System;
 	using Castle.ActiveRecord.Framework;
 	using Castle.ActiveRecord.Framework.Config;
@@ -112,4 +113,5 @@ namespace Castle.ActiveRecord.Tests
 			}
 		}
 	}
+#endif
 }

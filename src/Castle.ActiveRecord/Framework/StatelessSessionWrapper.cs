@@ -117,14 +117,9 @@ namespace Castle.ActiveRecord.Framework
 			return statelessSession.QueryOver<T>(alias);
 		}
 
-		public IQuery CreateQuery(string queryString)
+	    public IQuery CreateQuery(string queryString)
 		{
 			return statelessSession.CreateQuery(queryString);
-		}
-
-		public IQuery CreateQuery(IQueryExpression queryExpression)
-		{
-			throw new NotImplementedException();
 		}
 
 		public ISQLQuery CreateSQLQuery(string queryString)
@@ -212,7 +207,7 @@ namespace Castle.ActiveRecord.Framework
 			return statelessSession.Insert(entityName, obj);
 		}
 
-		public object Save(object obj)
+	    public object Save(object obj)
 		{
 			return statelessSession.Insert(obj);
 		}
@@ -222,7 +217,7 @@ namespace Castle.ActiveRecord.Framework
 			statelessSession.Update(entityName, obj);
 		}
 
-		public void Update(object obj)
+	    public void Update(object obj)
 		{
 			statelessSession.Update(obj);
 		}
@@ -282,6 +277,11 @@ namespace Castle.ActiveRecord.Framework
 			throw new NotWrappedException();
 		}
 
+        public IQuery CreateQuery(IQueryExpression queryExpression)
+        {
+            throw new NotWrappedException();
+        }
+
 		public IQuery CreateSQLQuery(string sql, string[] returnAliases, Type[] returnClasses)
 		{
 			throw new NotWrappedException();
@@ -292,7 +292,7 @@ namespace Castle.ActiveRecord.Framework
 			throw new NotWrappedException();
 		}
 
-		public int Delete(string query, object[] values, NHibernate.Type.IType[] types)
+        public int Delete(string query, object[] values, NHibernate.Type.IType[] types)
 		{
 			throw new NotWrappedException();
 		}
@@ -454,10 +454,30 @@ namespace Castle.ActiveRecord.Framework
 			throw new NotWrappedException();
 		}
 
-		public object Merge(object obj)
+	    public T Merge<T>(T entity) where T : class
+	    {
+	        throw new NotWrappedException();
+	    }
+
+	    public T Merge<T>(string entityName, T entity) where T : class
+	    {
+            throw new NotWrappedException();
+	    }
+
+	    public object Merge(object obj)
 		{
 			throw new NotWrappedException();
 		}
+
+        public IQueryOver<T, T> QueryOver<T>(string entityName) where T : class
+        {
+            throw new NotWrappedException();
+        }
+
+        public IQueryOver<T, T> QueryOver<T>(string entityName, Expression<Func<T>> alias) where T : class
+        {
+            throw new NotWrappedException();
+        }
 
 		public void Persist(string entityName, object obj)
 		{
@@ -504,15 +524,25 @@ namespace Castle.ActiveRecord.Framework
 			throw new NotWrappedException();
 		}
 
+        public void Save(string entityName, object obj, object id)
+        {
+            throw new NotWrappedException();
+        }
+
 		public void SaveOrUpdate(string entityName, object obj)
 		{
 			throw new NotWrappedException();
 		}
-
+        
 		public void SaveOrUpdate(object obj)
 		{
 			throw new NotWrappedException();
 		}
+
+        public void SaveOrUpdate(string entityName, object obj, object id)
+        {
+            throw new NotWrappedException();
+        }
 
 		public object SaveOrUpdateCopy(object obj, object id)
 		{
@@ -544,7 +574,12 @@ namespace Castle.ActiveRecord.Framework
 			throw new NotWrappedException();
 		}
 
-		/// <summary>
+        public void Update(string entityName, object obj, object id)
+        {
+            throw new NotWrappedException();
+        }
+
+        /// <summary>
 		/// Creates a new <c>IQueryOver&lt;T&gt;</c> for the entity class.
 		/// </summary>
 		/// <typeparam name="T">The entity class</typeparam>

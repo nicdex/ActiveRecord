@@ -12,6 +12,9 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
+using System.Collections.Generic;
+using NHibernate.Mapping;
+
 namespace Castle.ActiveRecord.Framework
 {
 	using System;
@@ -102,7 +105,7 @@ namespace Castle.ActiveRecord.Framework
 			// entityIndex was specified, or if distinct was chosen.
 			if (distinct || entityIndex != -1)
 			{
-				Set set = (distinct ? new ListSet() : null);
+				ISet<object> set = (distinct ? new HashSet<object>() : null);
 
 				ICollection collection = list as ICollection;
 
@@ -162,7 +165,7 @@ namespace Castle.ActiveRecord.Framework
 		{
 			// we only need to perform an additional processing if 
 			// distinct was chosen.
-			Set set = (distinct ? new ListSet() : null);
+			ISet<Object> set = (distinct ? new HashSet<object>() : null);
 
 			ICollection coll = list as ICollection;
 			IList newList = coll != null ? new ArrayList(coll.Count) : new ArrayList();

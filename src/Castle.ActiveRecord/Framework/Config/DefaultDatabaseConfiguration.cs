@@ -67,7 +67,7 @@ namespace Castle.ActiveRecord.Framework.Config
 				case DatabaseType.MySql5:
 					return Configure<MySqlDataDriver, MySQL5Dialect>();
 				case DatabaseType.Firebird:
-					return Configure<FirebirdDriver, FirebirdDialect>(Firebird());
+					return Configure<FirebirdClientDriver, FirebirdDialect>(Firebird());
 				case DatabaseType.PostgreSQL:
 					return Configure<NpgsqlDriver, PostgreSQLDialect>();
 				case DatabaseType.PostgreSQL81:

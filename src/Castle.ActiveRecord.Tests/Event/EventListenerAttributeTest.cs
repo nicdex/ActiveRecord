@@ -12,11 +12,11 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
+using System.Collections.Generic;
 using System.Reflection;
 
 namespace Castle.ActiveRecord.Tests.Event
 {
-	using Iesi.Collections;
 	using System;
 	using NUnit.Framework;
 	using Castle.ActiveRecord;
@@ -244,7 +244,7 @@ namespace Castle.ActiveRecord.Tests.Event
 		{
 			public void OnLoad(LoadEvent @event, LoadType loadType){}
 			public void OnDelete(DeleteEvent @event){}
-			public void OnDelete(DeleteEvent @event, ISet transientEntities){}
+			public void OnDelete(DeleteEvent @event, ISet<Object> transientEntities){}
 		}
 
 		[EventListener(Singleton = true)]

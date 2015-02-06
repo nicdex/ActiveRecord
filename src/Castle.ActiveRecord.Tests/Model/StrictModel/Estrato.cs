@@ -12,6 +12,8 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
+using System.Collections.Generic;
+
 namespace Castle.ActiveRecord.Tests.Model.StrictModel
 {
 	using System;
@@ -32,8 +34,8 @@ namespace Castle.ActiveRecord.Tests.Model.StrictModel
 		private EstratoType type;
 		private QuestionContainer container;
 		private Estrato parentEstrato;
-		private ISet subestratos = new ListSet();
-		private ISet references = new ListSet();
+		private ISet<Estrato> subestratos = new SortedSet<Estrato>();
+		private ISet<Estrato> references = new SortedSet<Estrato>();
 
 		public Estrato()
 		{
@@ -61,7 +63,7 @@ namespace Castle.ActiveRecord.Tests.Model.StrictModel
 		}
 
 		[HasAndBelongsToMany( typeof(Estrato), Table="EstratoRefEstrato", ColumnRef="ref_estrato_id", ColumnKey="estrato_id" )]
-		public ISet ReferencedEstratos
+		public ISet<Estrato> ReferencedEstratos
 		{
 			get { return references; }
 			set { references = value; }
@@ -75,7 +77,7 @@ namespace Castle.ActiveRecord.Tests.Model.StrictModel
 		}
 
 		[HasMany( typeof(Estrato), Inverse=true, Cascade=ManyRelationCascadeEnum.All)]
-		public ISet SubEstratos
+		public ISet<Estrato> SubEstratos
 		{
 			get { return subestratos; }
 			set { subestratos = value; }

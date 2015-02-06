@@ -14,16 +14,15 @@
 
 namespace Castle.ActiveRecord.Tests.Model.GenericModel
 {
-	using System;
-	using System.Collections;
-	using Iesi.Collections.Generic;
+    using System;
+    using System.Collections.Generic;
 
-	[ActiveRecord( "Companies", DiscriminatorColumn = "type", DiscriminatorType = "String", DiscriminatorValue = "company" )]
+    [ActiveRecord( "Companies", DiscriminatorColumn = "type", DiscriminatorType = "String", DiscriminatorValue = "company" )]
 	public class Company : ActiveRecordBase<Company>
 	{
 		private int id;
 		private String name;
-		private ISet<Person> _people = new HashedSet<Person>();
+		private ISet<Person> _people = new HashSet<Person>();
 		private PostalAddress _address;
 
 		public Company()

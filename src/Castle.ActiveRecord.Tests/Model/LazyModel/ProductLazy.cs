@@ -14,16 +14,14 @@
 
 namespace Castle.ActiveRecord.Tests.Model.LazyModel
 {
-	using System;
+    using System;
+    using System.Collections.Generic;
 
-	using Iesi.Collections;
-
-
-	[ActiveRecord]
+    [ActiveRecord]
 	public class ProductLazy : ActiveRecordValidationBase
 	{
 		private int id;
-		private ISet categories = new HashedSet();
+        private ISet<CategoryLazy> categories = new HashSet<CategoryLazy>();
 
 		public ProductLazy()
 		{
@@ -37,7 +35,7 @@ namespace Castle.ActiveRecord.Tests.Model.LazyModel
 		}
 
 		[HasMany( typeof(CategoryLazy), Lazy=true, Cascade=ManyRelationCascadeEnum.All )]
-		public ISet Categories
+		public ISet<CategoryLazy> Categories
 		{
 			get { return categories; }
 			set { categories = value; }
@@ -45,17 +43,17 @@ namespace Castle.ActiveRecord.Tests.Model.LazyModel
 
 		public static void DeleteAll()
 		{
-			ActiveRecordBase.DeleteAll( typeof(ProductLazy) );
+			DeleteAll( typeof(ProductLazy) );
 		}
 
 		public static ProductLazy[] FindAll()
 		{
-			return (ProductLazy[]) ActiveRecordBase.FindAll( typeof(ProductLazy) );
+			return (ProductLazy[]) FindAll( typeof(ProductLazy) );
 		}
 
 		public static ProductLazy Find(int id)
 		{
-			return (ProductLazy) ActiveRecordBase.FindByPrimaryKey( typeof(ProductLazy), id );
+			return (ProductLazy) FindByPrimaryKey( typeof(ProductLazy), id );
 		}
 	}
 

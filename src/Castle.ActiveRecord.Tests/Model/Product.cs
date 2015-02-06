@@ -14,17 +14,17 @@
 
 namespace Castle.ActiveRecord.Tests.Model
 {
-	using System.Collections;
-	using Iesi.Collections;
+    using System.Collections;
+    using System.Collections.Generic;
 
-	[ActiveRecord("Product")]
+    [ActiveRecord("Product")]
 	public class Product : ActiveRecordBase
 	{
 		private int id;
 		private string product_name;
 		private float price;
 		private string serial_number;
-		private ISet _orders;
+		private ISet<Order> _orders;
 
 		[PrimaryKey(PrimaryKeyType.Native, "ProductID")]
 		public int ID
@@ -57,7 +57,7 @@ namespace Castle.ActiveRecord.Tests.Model
 		[HasAndBelongsToMany(typeof (Order), RelationType.Set,
 			Table="line_item",
 			ColumnRef="order_id", ColumnKey="product_id", Inverse=true)]
-		public ISet Orders
+		public ISet<Order> Orders
 		{
 			get { return _orders; }
 			set { _orders = value; }
@@ -65,12 +65,12 @@ namespace Castle.ActiveRecord.Tests.Model
 
 		public static Product Find(int id)
 		{
-			return ((Product) (ActiveRecordBase.FindByPrimaryKey(typeof (Product), id)));
+			return ((Product) (FindByPrimaryKey(typeof (Product), id)));
 		}
 
 		public static void DeleteAll()
 		{
-			ActiveRecordBase.DeleteAll(typeof (Product));
+			DeleteAll(typeof (Product));
 		}
 	}
 
@@ -124,12 +124,12 @@ namespace Castle.ActiveRecord.Tests.Model
 
 		public static ProductWithIDBag Find(int id)
 		{
-			return ((ProductWithIDBag) (ActiveRecordBase.FindByPrimaryKey(typeof (ProductWithIDBag), id)));
+			return ((ProductWithIDBag) (FindByPrimaryKey(typeof (ProductWithIDBag), id)));
 		}
 
 		public static void DeleteAll()
 		{
-			ActiveRecordBase.DeleteAll(typeof (ProductWithIDBag));
+			DeleteAll(typeof (ProductWithIDBag));
 		}
 	}
 }
