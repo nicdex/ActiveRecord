@@ -26,6 +26,7 @@ namespace Castle.ActiveRecord.Tests
 	using NUnit.Framework;
 	using System.Collections;
 	using Castle.ActiveRecord.Queries;
+    using log4net.Config;
 
 	[TestFixture]
 	public class StatelessSessionScopeTestCase : AbstractActiveRecordTest
@@ -106,7 +107,7 @@ Please check the stacktrace and change your code accordingly.", ex.Message);
 		}
 
 		[Test]
-		public void Get_with_nonlazy_classes_does_not_work()
+		public void Get_with_nonlazy_classes_works()
 		{
 			Initialize();
 
@@ -115,16 +116,7 @@ Please check the stacktrace and change your code accordingly.", ex.Message);
 
 			using (new StatelessSessionScope())
 			{
-				try
-				{
-					Blog.Find(1);
-					Assert.Fail();
-				}
-				catch(ActiveRecordException ex)
-				{
-					Assert.AreEqual(typeof(SessionException),ex.InnerException.GetType());
-					Assert.AreEqual("collections cannot be fetched by a stateless session", ex.InnerException.Message);
-				}
+                Assert.DoesNotThrow(() => Blog.Find(1));
 			}
 		}
 
@@ -265,6 +257,8 @@ Please check the stacktrace and change your code accordingly.", ex.Message);
 		[Test]
 		public void Can_delete_instances()
 		{
+            XmlConfigurator.Configure();
+
 			InitializeLazy();
 			using (new SessionScope())
 				CreateLazyBlog();
@@ -272,7 +266,7 @@ Please check the stacktrace and change your code accordingly.", ex.Message);
 			var query = new SimpleQuery<BlogLazy>("from BlogLazy b where b.Author = ?", "Mort");
 			using (new StatelessSessionScope())
 			{
-				foreach (var blog in query.Execute())
+                foreach (var blog in query.Execute())
 					blog.Delete();
 			}
 

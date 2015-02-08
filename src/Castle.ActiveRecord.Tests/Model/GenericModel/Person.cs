@@ -12,6 +12,8 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
+using System.Collections.Generic;
+
 namespace Castle.ActiveRecord.Tests.Model.GenericModel
 {
 	using System;
@@ -26,7 +28,7 @@ namespace Castle.ActiveRecord.Tests.Model.GenericModel
 
 		public Person()
 		{
-			_companies = new ArrayList();
+			_companies = new List<Company>();
 		}
 
 		[PrimaryKey]

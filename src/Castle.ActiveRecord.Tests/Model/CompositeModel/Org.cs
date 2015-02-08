@@ -12,6 +12,8 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
+using System.Collections.Generic;
+
 namespace Castle.ActiveRecord.Tests.Model.CompositeModel
 {
 	using System;
@@ -28,7 +30,7 @@ namespace Castle.ActiveRecord.Tests.Model.CompositeModel
 
 		public Org()
 		{
-			_agents = new ArrayList();
+			_agents = new List<Agent>();
 			_created = DateTime.Now;
 			_version = -1;
 		}
