@@ -26,7 +26,6 @@ namespace Castle.ActiveRecord.Tests
 	using NUnit.Framework;
 	using System.Collections;
 	using Castle.ActiveRecord.Queries;
-    using log4net.Config;
 
 	[TestFixture]
 	public class StatelessSessionScopeTestCase : AbstractActiveRecordTest
@@ -257,9 +256,7 @@ Please check the stacktrace and change your code accordingly.", ex.Message);
 		[Test]
 		public void Can_delete_instances()
 		{
-            XmlConfigurator.Configure();
-
-			InitializeLazy();
+            InitializeLazy();
 			using (new SessionScope())
 				CreateLazyBlog();
 
